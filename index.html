@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kornrapop Khoonpitak — CS &amp; Cybersecurity</title>
+<meta name="description" content="Portfolio of Kornrapop (KK) Khoonpitak — Computer Science student specialising in cybersecurity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0E13;
+    --bg-raised: #12161D;
+    --bg-card: #151A22;
+    --line: #232935;
+    --text: #E7E6E2;
+    --text-dim: #8A93A3;
+    --text-faint: #565F70;
+    --accent: #F0B429;
+    --accent-dim: #8A6A1E;
+    --ok: #4FBF80;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--accent); color: #14100a; }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11, 14, 19, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-mark {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+  .nav-mark .dot { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-dim);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    padding: 88px 0 64px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ok);
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: var(--ok);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--ok);
+    animation: pulse 2s infinite ease-in-out;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  h1 {
+    font-family: var(--mono);
+    font-weight: 800;
+    font-size: clamp(32px, 5.4vw, 50px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+  h1 .accent { color: var(--accent); }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin-bottom: 34px;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 46px;
+  }
+  .btn {
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 11px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.15s ease;
+    border: 1px solid var(--line);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #14100a;
+    font-weight: 700;
+    border-color: var(--accent);
+  }
+  .btn-primary:hover { background: #ffc94d; }
+  .btn-ghost {
+    color: var(--text);
+    background: var(--bg-raised);
+  }
+  .btn-ghost:hover { border-color: var(--accent-dim); color: var(--accent); }
+
+  /* terminal block */
+  .terminal {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-raised);
+  }
+  .terminal-bar span {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--line);
+  }
+  .terminal-bar .label {
+    width: auto;
+    border-radius: 0;
+    margin-left: 6px;
+    color: var(--text-faint);
+    font-size: 12px;
+    background: none;
+  }
+  .terminal-body { padding: 18px 20px; color: var(--text-dim); }
+  .terminal-body .line { display: block; white-space: pre; }
+  .terminal-body .prompt { color: var(--accent); }
+  .terminal-body .ok { color: var(--ok); }
+  .terminal-body .path { color: var(--text); }
+  .caret {
+    display: inline-block;
+    width: 8px; height: 15px;
+    background: var(--accent);
+    vertical-align: middle;
+    animation: blink 1s steps(1) infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .section-num {
+    font-family: var(--mono);
+    color: var(--text-faint);
+    font-size: 13px;
+  }
+  .section-title {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+  }
+  .about-text p { color: var(--text-dim); margin-bottom: 16px; font-size: 15px; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+
+  .stat-block {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--text-faint); font-family: var(--mono); }
+  .stat-value { color: var(--text); text-align: right; font-weight: 500; }
+
+  /* ---------- FOCUS / SKILLS ---------- */
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .focus-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .focus-card .icon {
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .focus-card h3 {
+    font-size: 14.5px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .focus-card p {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .project {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px;
+    margin-bottom: 18px;
+    transition: border-color 0.15s ease;
+  }
+  .project:hover { border-color: var(--accent-dim); }
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .project-name {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 16.5px;
+  }
+  .project-name a { text-decoration: none; }
+  .project-name a:hover { color: var(--accent); }
+  .project-status {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ok);
+    background: rgba(79, 191, 128, 0.1);
+    border: 1px solid rgba(79, 191, 128, 0.25);
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .project-desc {
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+  .project-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    border: 1px solid var(--line);
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+  .project-link {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .project-link:hover { text-decoration: underline; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  footer {
+    padding: 32px 0 48px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 720px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .focus-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 16px; }
+    h1 { font-size: 30px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark">kk<span class="dot">.</span>khoonpitak</div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#focus">focus</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">OPEN TO OPPORTUNITIES · AUTUMN 2027</div>
+    <h1>Kornrapop Khoonpitak.<br>Building &amp; breaking <span class="accent">systems</span> to understand them.</h1>
+    <p class="hero-sub">
+      <strong>Computer Science student at the University of Reading</strong>, specialising in cybersecurity.
+      I build tools to learn how networks, systems, and defences actually work &mdash; then document what broke,
+      what I fixed, and what I'd do differently.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View projects →</a>
+      <a href="https://github.com/Kurosaki21" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span></span><span></span><span></span>
+        <span class="label">kk@portfolio: ~</span>
+      </div>
+      <div class="terminal-body">
+<span class="line"><span class="prompt">$</span> whoami</span>
+<span class="line"><span class="path">kk_khoonpitak — CS student, cybersecurity track</span></span>
+<span class="line">&nbsp;</span>
+<span class="line"><span class="prompt">$</span> cat focus.txt</span>
+<span class="line"><span class="ok">[+]</span> network security &amp; penetration testing</span>
+<span class="line"><span class="ok">[+]</span> detection engineering &amp; blue team tooling</span>
+<span class="line"><span class="ok">[+]</span> secure systems design</span>
+<span class="line">&nbsp;</span>
+<span class="line"><span class="prompt">$</span> <span class="caret"></span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-title">about</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a second-year Computer Science student at the <strong>University of Reading</strong>,
+          heading into my final year with a specialisation in cybersecurity. My degree covers everything
+          from machine learning and data visualisation to blockchain and computer security &mdash;
+          but the thread running through my own projects is a hands-on, break-it-to-understand-it approach.
+        </p>
+        <p>
+          Outside coursework, I'm working through <strong>CompTIA Security+ (SY0-701)</strong>, practising on
+          <strong>TryHackMe</strong>, and building small tools that force me to actually implement concepts
+          rather than just read about them &mdash; from a multithreaded port scanner to more involved
+          detection and analysis projects.
+        </p>
+        <p>
+          I'm currently preparing applications for cybersecurity-focused postgraduate study and graduate
+          schemes starting in <strong>autumn 2027</strong>.
+        </p>
+      </div>
+      <div class="stat-block">
+        <div class="stat-row"><span class="stat-label">degree</span><span class="stat-value">BSc Computer Science</span></div>
+        <div class="stat-row"><span class="stat-label">university</span><span class="stat-value">University of Reading</span></div>
+        <div class="stat-row"><span class="stat-label">track</span><span class="stat-value">Cybersecurity</span></div>
+        <div class="stat-row"><span class="stat-label">year</span><span class="stat-value">Entering Year 3</span></div>
+        <div class="stat-row"><span class="stat-label">base</span><span class="stat-value">Reading, UK</span></div>
+        <div class="stat-row"><span class="stat-label">status</span><span class="stat-value">Building portfolio</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="focus">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-title">focus areas</span>
+    </div>
+    <div class="focus-grid">
+      <div class="focus-card">
+        <span class="icon">[ scan ]</span>
+        <h3>Offensive &amp; Recon</h3>
+        <p>Port scanning, service enumeration, and vulnerability identification in controlled lab environments.</p>
+      </div>
+      <div class="focus-card">
+        <span class="icon">[ watch ]</span>
+        <h3>Detection &amp; Defence</h3>
+        <p>Log analysis, alerting, and understanding how attacks look from the defender's side.</p>
+      </div>
+      <div class="focus-card">
+        <span class="icon">[ build ]</span>
+        <h3>Systems &amp; Design</h3>
+        <p>Applying secure design principles from coursework in OS, networking, and software architecture.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <span class="section-title">projects</span>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name"><a href="https://github.com/Kurosaki21/python-port-scanner" target="_blank" rel="noopener">python-port-scanner</a></span>
+        <span class="project-status">complete</span>
+      </div>
+      <p class="project-desc">
+        A multithreaded TCP port scanner built from scratch in Python. Handles concurrent connection
+        attempts safely using a threading lock to prevent race conditions on shared output, and
+        cross-references open ports against a dictionary of known services.
+      </p>
+      <div class="project-tags">
+        <span class="tag">python</span>
+        <span class="tag">sockets</span>
+        <span class="tag">threading</span>
+        <span class="tag">argparse</span>
+      </div>
+      <a class="project-link" href="https://github.com/Kurosaki21/python-port-scanner" target="_blank" rel="noopener">View repository →</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">next project</span>
+        <span class="project-status" style="color: var(--text-faint); background: transparent; border-color: var(--line);">in progress</span>
+      </div>
+      <p class="project-desc">
+        More projects in the works &mdash; currently building out home-lab detection engineering and
+        web application security projects. Check back soon.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <span class="section-title">contact</span>
+    </div>
+    <p style="color: var(--text-dim); margin-bottom: 24px; max-width: 500px;">
+      Open to conversations about cybersecurity, postgraduate study, or graduate opportunities.
+      Reach out via any of the below.
+    </p>
+    <div class="contact-row">
+      <a href="https://github.com/Kurosaki21" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+      <a href="mailto:kaka.khunpitak@gmail.com" class="btn btn-ghost">Email ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  built &amp; maintained by KK · last updated 2026
+</footer>
+
+</body>
+</html>
